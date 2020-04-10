@@ -1,0 +1,13 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<div class="container text-center">
+    <h1>Ryckee's personal website</h1>
+    
+    <h2>About me</h2>
+    <a href="{% url 'about' %}" class="btn btn-primary">For more details</a>
+
+    <h2>Projects</h2>
+    <a href="{% url 'all_projects' %}" class="btn btn-primary">Know more</a>
+    
+    <h2>Blogs</h2>
+    <a href="{% url 'all_blogs' %}" class="btn btn-primary">Read more</a>
+</div>
