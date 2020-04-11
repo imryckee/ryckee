@@ -1,15 +1,24 @@
-<h1>Projects</h1>
+{% extends 'home/base.html' %}
+{% block title %}
+Ryckee's projects
+{% endblock %}
 
-{% for pj in projects %}
-<h2>{{ pj.title }}</h2>
-<p>{{ pj.description }}</p>
-<img src='{{ pj.image.url }}' height=500><br>
+{% block content %}
+<div class="text-center">
+    <h1>Projects</h1>
 
-{% if pj.live %}
-<a href='{{pj.live}}' class="btn btn-primary">Live</a>
-{% endif %}
-
-{% if pj.github %}
-<a href='{{pj.github}}' class="btn btn-primary">Github</a>
-{% endif %}
-{% endfor %}
+    {% for pj in projects %}
+    <h2>{{ pj.title }}</h2>
+    <p>{{ pj.description }}</p>
+    <img src='{{ pj.image.url }}' height=450><br><br>
+    
+    {% if pj.live %}
+    <a href='{{pj.live}}' class="btn btn-primary">Live</a>
+    {% endif %}
+    
+    {% if pj.github %}
+    <a href='{{pj.github}}' class="btn btn-primary">Github</a>
+    {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}

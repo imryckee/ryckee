@@ -1,9 +1,19 @@
-<h1>Blogs</h1>
+{% extends 'home/base.html' %}
 
-{% for blog in blogs %}
-<h2>{{ blog.title }}</h2>
-<p>{{ blog.date }}</p>
-<p>{{ blog.time }}</p>
-<p>{{ blog.text }}</p>
-<img src='{{ blog.image.url }}' height=500><br>
-{% endfor %}
+{% block title %}
+Ryckee's blogs
+{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h1>Blogs</h1>
+    <h2>Ryckee has written {{blogs.count}} blog{{ blogs.count|pluralize}}.</h2>
+
+    {% for blog in blogs %}
+    <a href='{% url "blog:detail" blog.id %}'><h2>{{ blog.title }}</h2></a>
+    <p>{{ blog.time|time:'H:i' }}, {{ blog.date|date:'F d Y' }}</p>
+    <p>{{ blog.text|striptags|truncatechars:100 }}</p>
+    {% endfor %}
+</div>
+
+{% endblock %}

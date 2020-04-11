@@ -7,3 +7,6 @@ class Project(models.Model):
     image = models.ImageField(upload_to='project/images/')
     live = models.URLField(blank=True)
     github = models.URLField(blank=True)
+
+    def __str__(self):
+        return self.title
