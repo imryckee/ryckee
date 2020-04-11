@@ -1,13 +1,62 @@
 {% extends 'home/base.html' %}
+{% load static %}
+
 {% block title %}
 Ryckee's personal website
 {% endblock %}
 
 {% block content %}
-<div class="text-center">
-    <h1>Ryckee's personal website</h1>
-    <h2>About me</h2>
-    <h2>Projects</h2>
-    <h2>Blogs</h2>
+<div class="row justify-content-start align-items-center">
+    <div class="col-lg-4 col-md-6">
+        <img src="{% static 'about/me.jpg' %}" class="img-fluid">
+    </div>
+    <div class="col-lg-4 col-md-6">
+        <h1>About me</h1>
+        <hr>
+        <p>Hi, my name is ryckee.</p>
+        <p>I'm a software developer living in China.</p>
+        <p>Here is my personal website.</p>
+        <br>
+        <a href="https://github.com/imryckee" class="btn btn-primary">Github</a>
+        <a href="{% static 'about/resume.pdf' %}" class="btn btn-primary">View resume</a>
+    </div>
 </div>
+
+<h1  class="mt-5">Blogs</h1>
+<hr>
+<div class="row">
+    {% for blog in blogs %}
+    <div class="col-lg-4 col-md-6">
+        {% if blog.image %}
+        <img src="{{ blog.image.url }}" class="img-fluid mb-2" width='350px'>
+        {% endif %}
+
+        <a href='{% url "blog:detail" blog.id %}'><h3>{{ blog.title }}</h3></a>
+        <p>{{ blog.time|time:'H:i' }}, {{ blog.date|date:'F d Y' }}</p>
+        <p>{{ blog.text|striptags|truncatechars:100 }}</p>
+    </div>
+    {% endfor %}
+</div>
+
+<h1  class="mt-5">Projects</h1>
+<hr>
+<div class="row">
+    {% for pj in projects %}
+    <div class="col-lg-4 col-md-6">
+        <img src="{{ pj.image.url }}" class="img-fluid mb-2" width='350px'>
+        <h3>{{ pj.title }}</h3>
+        <p>{{ pj.description|striptags|truncatechars:100 }}</p>
+
+        {% if pj.live %}
+        <a href='{{pj.live}}' class="btn btn-primary">Live</a>
+        {% endif %}
+        
+        {% if pj.github %}
+        <a href='{{pj.github}}' class="btn btn-primary">Source code</a>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+<br>
+
 {% endblock %}
