@@ -6,57 +6,57 @@ Ryckee's personal website
 {% endblock %}
 
 {% block content %}
-<div class="row justify-content-start align-items-center">
-    <div class="col-lg-4 col-md-6">
-        <img src="{% static 'about/me.jpg' %}" class="img-fluid">
+<div class="row align-items-center">
+    <div class='col-md-6 col-lg-4'>
+        <img src="{% static 'about/me.jpg' %}" width='100%'>
     </div>
-    <div class="col-lg-4 col-md-6">
-        <h1>About me</h1>
+    <div class="col-md-6 col-lg-4">
+        <h1><a href='{% url "about" %}' class="text-dark">About me</a></h1>
         <hr>
         <p>Hi, my name is ryckee.</p>
         <p>I'm a software developer living in China.</p>
         <p>Here is my personal website.</p>
         <br>
-        <a href="https://github.com/imryckee" class="btn btn-primary">Github</a>
-        <a href="{% static 'about/resume.pdf' %}" class="btn btn-primary">View resume</a>
+        <a href="https://github.com/imryckee"><img src="{% static 'about/github.jpg' %}" width='75px'></a>
+        <a href="{% static 'about/resume.pdf' %}"><img src="{% static 'about/resume.jpg' %}" width='75px'></a>
     </div>
 </div>
+<br>
 
-<h1  class="mt-5">Blogs</h1>
+<a href='{% url "project:all_projects" %}' class="text-dark">
+    <h1 class="d-inline">Projects</h1>
+</a>
 <hr>
 <div class="row">
-    {% for blog in blogs %}
-    <div class="col-lg-4 col-md-6">
-        {% if blog.image %}
-        <img src="{{ blog.image.url }}" class="img-fluid mb-2" width='350px'>
-        {% endif %}
-
-        <a href='{% url "blog:detail" blog.id %}'><h3>{{ blog.title }}</h3></a>
-        <p>{{ blog.time|time:'H:i' }}, {{ blog.date|date:'F d Y' }}</p>
-        <p>{{ blog.text|striptags|truncatechars:100 }}</p>
-    </div>
-    {% endfor %}
-</div>
-
-<h1  class="mt-5">Projects</h1>
-<hr>
-<div class="row">
-    {% for pj in projects %}
-    <div class="col-lg-4 col-md-6">
-        <img src="{{ pj.image.url }}" class="img-fluid mb-2" width='350px'>
-        <h3>{{ pj.title }}</h3>
-        <p>{{ pj.description|striptags|truncatechars:100 }}</p>
+    {% for pj in pjs %}
+    <div class="col-md-6 col-lg-4">
+        <a href='{% url "project:detail" pj.id %}'><img src="{{ pj.image.url }}" width='100%'></a>
+        <h2><a href='{% url "project:detail" pj.id %}'>{{ pj.title }}</a></h2>
+        <p>{{ pj.date|date:'F , Y' }}</p>
+        <p>{{ pj.summary }}</p>
 
         {% if pj.live %}
         <a href='{{pj.live}}' class="btn btn-primary">Live</a>
         {% endif %}
-        
         {% if pj.github %}
-        <a href='{{pj.github}}' class="btn btn-primary">Source code</a>
+        <a href='{{pj.github}}' class="btn btn-primary">Source code</a><br>
         {% endif %}
+        <br>
     </div>
     {% endfor %}
 </div>
 <br>
 
+<h1><a href='{% url "blog:all_blogs" %}' class="text-dark">Blogs</a></h1>
+<hr>
+<div class="row">
+    {% for blog in blogs %}
+    <div class="col-md-6 col-lg-4">
+        <a href='{% url "blog:detail" blog.id %}'><img src="{{ blog.image.url }}" class="mb-2" width='100%'></a>
+        <h2><a href='{% url "blog:detail" blog.id %}'>{{ blog.title }}</a></h2>
+        <p>{{ blog.date|date:'F d , Y' }}</p>
+        <p>{{ blog.summary }}</p>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}

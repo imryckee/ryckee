@@ -1,0 +1,27 @@
+{% extends 'home/base.html' %}
+
+{% block title %}
+{{ pj.title }} | ryckee
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class='col-12 col-md-8'>
+        <a href="{{ pj.image.url }}" target="_blank"><img src="{{ pj.image.url }}" width='100%'></a><br>
+        <br>
+        <div class='text-center'>
+            <h2>{{ pj.title }}</h2>
+            <p>{{ pj.date|date:'F , Y' }}</p>
+            <em>{{ pj.summary }}</em><br>
+            <br>
+            {% if pj.live %}
+            <a href='{{pj.live}}' class="btn btn-primary">Live</a>
+            {% endif %}
+            {% if pj.github %}
+            <a href='{{pj.github}}' class="btn btn-primary">Source code</a><br>
+            {% endif %}
+        </div>
+        <p>{{ pj.text|safe }}</p>
+    </div>
+</div>
+{% endblock %}

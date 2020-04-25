@@ -1,15 +1,21 @@
 {% extends 'home/base.html' %}
+
 {% block title %}
-{{ blog.title }}
+{{ blog.title }} | ryckee
 {% endblock %}
 
 {% block content %}
-<div class="text-center">
-    <h2>{{ blog.title }}</h2>
-    <p>{{ blog.time|time:'H:i' }} {{ blog.date|date:'F d Y' }}</p>
-    {% if blog.image %}
-    <img src='{{ blog.image.url }}' height=500><br>
-    {% endif %}
-    <p>{{ blog.text|safe }}</p>
+<div class="row justify-content-center">
+    <div class='col-12 col-md-8'>
+        <a href="{{ blog.image.url }}" target="_blank"><img src="{{ blog.image.url }}" width='100%'></a><br>
+        <br>
+        <div class='text-center'>
+            <h2>{{ blog.title }}</h2>
+            <p>{{ blog.time|time:'H:i' }} , {{ blog.date|date:'F d , Y' }}</p>
+            <em>{{ blog.summary }}</em><br>
+            <br>
+        </div>
+        <p>{{ blog.text|safe }}</p>
+    </div>
 </div>
 {% endblock %}

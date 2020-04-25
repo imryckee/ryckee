@@ -8,12 +8,38 @@ Ryckee's blogs
 <div class="text-center">
     <h1>Blogs</h1>
     <h2>Ryckee has written {{blogs.count}} blog{{ blogs.count|pluralize}}.</h2>
-
-    {% for blog in blogs %}
-    <a href='{% url "blog:detail" blog.id %}'><h2>{{ blog.title }}</h2></a>
-    <p>{{ blog.time|time:'H:i' }}, {{ blog.date|date:'F d Y' }}</p>
-    <p>{{ blog.text|striptags|truncatechars:100 }}</p>
-    {% endfor %}
+    <br>
 </div>
-
+<div class='row justify-content-center'>
+    <div class='col-12 col-md-6'>
+        {% for blog in blogs %}
+        <div class="card">
+            <a href='{% url "blog:detail" blog.id %}'><img src="{{ blog.image.url }}" width='100%'></a>
+            <div class="card-body">
+                <h2><a href='{% url "blog:detail" blog.id %}'>{{ blog.title }}</a></h2>
+                <p>{{ blog.date|date:'F d , Y' }}</p>
+                <p class="card-text">{{ blog.summary }}</p>
+            </div>
+        </div>
+        <br>
+        {% endfor %}
+    </div>
+    <div class='col-12 col-md-3'>
+        <div class="card">
+            <div class="card-body">
+                <h4>topics</h4>
+                <hr>
+                <h5>TBC</h5>
+            </div>
+        </div>
+        <br>
+        <div class="card">
+            <div class="card-body">
+                <h4>tags</h4>
+                <hr>
+                <h5>TBC</h5>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

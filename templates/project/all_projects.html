@@ -1,4 +1,5 @@
 {% extends 'home/base.html' %}
+
 {% block title %}
 Ryckee's projects
 {% endblock %}
@@ -6,19 +7,28 @@ Ryckee's projects
 {% block content %}
 <div class="text-center">
     <h1>Projects</h1>
-
-    {% for pj in projects %}
-    <h2>{{ pj.title }}</h2>
-    <p>{{ pj.description }}</p>
-    <img src='{{ pj.image.url }}' height=450><br><br>
-    
-    {% if pj.live %}
-    <a href='{{pj.live}}' class="btn btn-primary">Live</a>
-    {% endif %}
-    
-    {% if pj.github %}
-    <a href='{{pj.github}}' class="btn btn-primary">Github</a>
-    {% endif %}
+    <br>
+</div>
+<div class='row justify-content-center'>
+    {% for pj in pjs %}
+    <div class='col-12 col-md-5'>
+        <div class="card">
+            <a href='{% url "project:detail" pj.id %}'><img src="{{ pj.image.url }}" width='100%'></a>
+            <div class="card-body">
+                <h2><a href='{% url "project:detail" pj.id %}'>{{ pj.title }}</a></h2>
+                <p>{{ pj.date|date:'F , Y' }}</p>
+                <p class="card-text">{{ pj.summary }}</p>
+                
+                {% if pj.live %}
+                <a href='{{pj.live}}' class="btn btn-primary" target="_blank">Live</a>
+                {% endif %}
+                {% if pj.github %}
+                <a href='{{pj.github}}' class="btn btn-primary" target="_blank">Github</a>
+                {% endif %}
+            </div>
+        </div>
+        <br>
+    </div>
     {% endfor %}
 </div>
 {% endblock %}

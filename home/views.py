@@ -4,6 +4,6 @@ from blog.models import Blog
 
 # Create your views here.
 def home(request):
-    projects = Project.objects.all()
-    blogs = Blog.objects.all()
-    return render(request,'home/home.html',{'projects':projects,'blogs':blogs})
+    pjs = Project.objects.order_by('-date')
+    blogs = Blog.objects.order_by('-date','-time')
+    return render(request,'home/home.html',{'pjs':pjs,'blogs':blogs})
